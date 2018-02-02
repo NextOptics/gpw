@@ -99,6 +99,7 @@ public class GpwFin extends Application {
 		Menu menuBancos = new Menu("Bancos");
 			Menu menuBancContas = new Menu("ContasBanc");
 				MenuItem menuItemBancConCadastra = new MenuItem("Cadastra");
+					menuItemBancConCadastra.setOnAction(e -> menuItemBancConCadastra_Act());
 				MenuItem menuItemBancConMostra = new MenuItem("Mostra");
 				MenuItem menuItemBancConEdita = new MenuItem("Edita");
 				Menu menuBancConRelatorios = new Menu("Relatorios");
@@ -242,6 +243,12 @@ public class GpwFin extends Application {
 	public void menuItemDespAgenEmite_Act() {DespAgenEmite.show();}
 	
 	public void menuItemDespPagConfirma_Act() {DespPagConfirma.show();}
+	
+	public void menuItemBancConCadastra_Act() {
+		System.out.println();
+		System.out.println("******  Entrei no menuItem");
+		ContaBancCadastra.show();}
+			    
 	
 	public static void main (String[] args) {
 		launch(args);

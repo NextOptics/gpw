@@ -57,6 +57,7 @@ public class BusiRulePagadores implements BusiRuleSelec {
 	}
 	
 	public boolean lancar(ArrayList dados) {
+		
 		boolean valida = true;
 		DaoPagadores registro = new DaoPagadores();
 		registro.gravar(dados);

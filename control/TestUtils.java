@@ -212,5 +212,25 @@ public class TestUtils {
 	}	
 
 */
-	
+
+	public static void printContaBanc(ArrayList dadosContaBanc) {
+		System.out.println("********* : banco :       " + dadosContaBanc.get(0));
+		System.out.println("********* : codBanco :    " + dadosContaBanc.get(1));
+		System.out.println("********* : agencia :     " + dadosContaBanc.get(2)); 
+		System.out.println("********* : conta :       " + dadosContaBanc.get(3));
+		System.out.println("********* : tipoAgencia : " + dadosContaBanc.get(4));
+
+		System.out.println("********* : titular :     " + dadosContaBanc.get(5));
+		System.out.println("********* : gerente :     " + dadosContaBanc.get(6));
+		System.out.println("********* : agenCidade :  " + dadosContaBanc.get(7));
+		System.out.println("********* : agenBairro :  " + dadosContaBanc.get(8));
+		System.out.println("********* : agenRua :     " + dadosContaBanc.get(9));
+
+		System.out.println("********* : agenCep :     " + dadosContaBanc.get(10));
+		System.out.println("********* : agenTel :     " + dadosContaBanc.get(11));
+		System.out.println("********* : celGerente :  " + dadosContaBanc.get(12));
+		System.out.println("********* : contaValida : " + dadosContaBanc.get(13));
+		System.out.println("********* : codConta :    " + dadosContaBanc.get(14));
+		System.out.println("********* : contaTipo :   " + dadosContaBanc.get(15));
+	}	
 }
