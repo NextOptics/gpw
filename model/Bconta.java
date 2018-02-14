@@ -92,11 +92,13 @@ docum		VARCHAR(16)	Número do documento
 valor		DECIMAL(13,2)	Valor do lançamento
 natopera	VARCHAR(1)	Tipo da operação
 saldoant	DECIMAL(13,2)	Saldo antes do lançamento
+
 saldoatual	DECIMAL(13,2)	Saldo após o lançamento
 histórico	VARCHAR(30)	Descrição sucinta do lançamento
 usuário		INTEGER		Username do usuário que fez o lançamento
 lancanum	INTEGER		Número do lançamento
 contaorigdest	VARCHAR(16)	Conta de origem ou destino
+
 numpagam	INTEGER		Numero confirmação de pagamento
 
 */	

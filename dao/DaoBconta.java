@@ -106,6 +106,39 @@ public class DaoBconta {
 			MessageBox.show(e.getMessage(), "ERRO");
 		}
 	}
+
+	public boolean criarBconta(int codigo) { 
+
+		boolean valida = true;
+		String conta = "bconta" + codigo;
+		PreparedStatement prepStmt = null;
+
+		try{
+			con = Conexao.conectar();
+			String query = "CREATE TABLE IF NOT EXISTS " + conta + 
+			" (dataLanc DATE NOT NULL, " +
+			"docum VARCHAR(16), " +
+			"valor DECIMAL(13,2), " +
+			"natopera VARCHAR(1), " +
+			"saldoant DECIMAL(13,2), " +
+			"saldoatual DECIMAL(13,2), " +
+			"historico VARCHAR(30), " +
+			"usuario INTEGER, " +
+			"lancanum INTEGER KEY AUTO_INCREMENT, " +
+			"contaorigdest VARCHAR(16), " +
+			"numpagam INTEGER)";
+			
+			prepStmt = con.prepareStatement(query);
+			prepStmt.execute();
+			prepStmt.close();
+				
+		}catch(Exception e){
+			valida = false;
+			MessageBox.show(e.getMessage(), "ERRO");
+		}
+
+		return valida;
+	}
 }
 
 

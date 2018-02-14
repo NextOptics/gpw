@@ -9,6 +9,8 @@ import javafx.geometry.*;
 import javafx.scene.control.cell.*;
 import javafx.collections.*;
 import java.util.ArrayList;
+import javafx.scene.text.*;
+
 
 import gpw.control.*;
 import gpw.model.ContasBanc;
@@ -16,55 +18,59 @@ import gpw.dao.DaoContasBanc;
 
 
 /*
-	private static TableView<ContasBanc> criaTableContas(ObservableList<ContasBanc> tabela)
-	private static void btnValidar_Act()
-	private static void btnLancar_Act() 
-	private static void btnNovoLanc_Act()
-	private static boolean dadosEntrados()
-
+	static TableView<ContasBanc> criaTableContas(ObservableList<ContasBanc> tabela) {
+	private static void tbvContasBanc_Change() {
+	private static void preencheEdts() {
+	private static void btnValidar_Act() {
+	private static void btnLancar_Act() {
+	private static void btnNovoLanc_Act() {
+	private static boolean dadosEntrados() {
+	private static ArrayList populaArrAtualContaBanc() {
+	private static void limparEdts() {
+	private static void desabilitarEdts() {
+	private static void habilitarEdts() {
 */
 
 
-
 public class ContaBancCadastra {
-	static Stage stagePrimary;
-	static Scene scenePrimary;
+
+	protected static Stage stagePrimary;
+	protected static Scene scenePrimary;
 	
-	static VBox panePrimary, paneBanco,paneCodBanco,paneAgencia,paneConta,paneTitular;
-	static VBox paneTipoAg, paneAgenRua, paneBairro,paneCidade, paneCep;
-	static VBox paneGerente, paneTel, paneCel, paneContasAtivas;
+	protected static VBox panePrimary, paneBanco,paneCodBanco,paneAgencia,paneConta,paneTitular;
+	protected static VBox paneTipoAg, paneAgenRua, paneBairro,paneCidade, paneCep;
+	protected static VBox paneGerente, paneTel, paneCel, paneContasAtivas;
 
-	static HBox paneLinha1,paneLinha2, paneLinha3,paneBotoes,paneLinha4;
+	protected static HBox paneLinha1,paneLinha2, paneLinha3,paneBotoes,paneLinha4;
 	
-	static private Label lblRotBanco,lblRotCodBanco,lblRotAgencia,lblRotConta,lblRotTitular;
-	static private TextField edtNomeBanco,edtCodBanco,edtAgenBanco,edtContaNumero,edtTitularConta;
+	protected static Label lblRotBanco,lblRotCodBanco,lblRotAgencia,lblRotConta,lblRotTitular;
+	protected static TextField edtNomeBanco,edtCodBanco,edtAgenBanco,edtContaNumero,edtTitularConta;
 
-	static private Label lblRotTipoAg, lblRotAgenRua,lblRotBairro, lblRotCidade, lblRotCep, lblRotContasAtivas;
-	static private TextField edtTipoAgen, edtAgenRua, edtBairro, edtCidade,edtCep;
+	protected static Label lblRotTipoAg, lblRotAgenRua,lblRotBairro, lblRotCidade, lblRotCep, lblRotContasAtivas;
+	protected static TextField edtTipoAgen, edtAgenRua, edtBairro, edtCidade,edtCep;
 
-	static private Label lblRotGerente, lblRotTel, lblRotCel;
-	static private TextField edtGerente, edtTel, edtCel;
+	protected static Label lblRotGerente, lblRotTel, lblRotCel;
+	protected static TextField edtGerente, edtTel, edtCel;
 
-	static Button btnValidar, btnLancar, btnNovoLanc;
+	protected static Button btnValidar, btnLancar, btnNovoLanc;
 
 
-	static ObservableList<ContasBanc> contasBancAtivas; // Contem os registros lidos da tabela contasBancariasbanc do banco de dados
+	protected static ObservableList<ContasBanc> contasBancAtivas; // Contem os registros lidos da tabela contasBancariasbanc do banco de dados
 									// correspondentes as contas bancarias ativas
-	static TableView<ContasBanc> tbvContasBanc;
-	static DaoContasBanc contasBancarias;
-	static ContasBanc atualContaBanc;
+	protected static TableView<ContasBanc> tbvContasBanc;
+	protected static DaoContasBanc contasBancarias;
+	protected static ContasBanc atualContaBanc;
 
+	protected static ArrayList arrListDados;
+	protected static boolean chave;
 	public static void show() {	
-
-		atualContaBanc = new ContasBanc();
 
 		stagePrimary = new Stage();
 		stagePrimary.initModality(Modality.WINDOW_MODAL);
 		stagePrimary.setTitle("Cadastra Conta Bancaria");
-		stagePrimary.setMinWidth(930);
-		stagePrimary.setMaxWidth(930);
-		stagePrimary.setMaxHeight(930);
-
+		stagePrimary.setMinWidth(940);
+		stagePrimary.setMaxWidth(940);
+		stagePrimary.setMaxHeight(940);
 
 		// --------------------- Linha 1
 
@@ -76,7 +82,7 @@ public class ContaBancCadastra {
 		tbvContasBanc = criaTableContas(contasBancAtivas);
 		tbvContasBanc.setItems(contasBancAtivas);	
 		
-//		tbvContasBanc.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> tbvContasBanc_Change());	
+		tbvContasBanc.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> tbvContasBanc_Change());	
 		
 		paneContasAtivas = new VBox(lblRotContasAtivas,tbvContasBanc);
 		paneContasAtivas.setPrefHeight(200);
@@ -85,31 +91,35 @@ public class ContaBancCadastra {
 
 		paneLinha1 = new HBox(paneContasAtivas);
 		paneLinha1.setPadding(new Insets(30,0,0,20));
-
 	
 		// --------------------  Linha 2
 		lblRotBanco = new Label("Banco");
 		edtNomeBanco = new TextField("");
+		edtNomeBanco.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
 		paneBanco = new VBox(lblRotBanco, edtNomeBanco);
 		paneBanco.setPrefWidth(150);
 
 		lblRotCodBanco = new Label("NumBanco");
 		edtCodBanco = new TextField("");
+		edtCodBanco.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
 		paneCodBanco = new VBox(lblRotCodBanco,edtCodBanco);
 		paneCodBanco.setPrefWidth(80);
 		
 		lblRotAgencia = new Label("Agencia");
 		edtAgenBanco = new TextField("");
+		edtAgenBanco.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
 		paneAgencia = new VBox(lblRotAgencia,edtAgenBanco);
 		paneAgencia.setPrefWidth(100);
 		
 		lblRotConta = new Label("Conta");
 		edtContaNumero = new TextField("");
+		edtContaNumero.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
 		paneConta = new VBox(lblRotConta,edtContaNumero);
 		paneConta.setPrefWidth(120);
 		
 		lblRotTitular = new Label("Titular");
 		edtTitularConta = new TextField("");
+		edtTitularConta.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
 		paneTitular = new VBox(lblRotTitular,edtTitularConta);
 		paneTitular.setPrefWidth(250);
 
@@ -117,69 +127,70 @@ public class ContaBancCadastra {
 		paneLinha2.setSpacing(20);
 		paneLinha2.setPadding(new Insets(30,0,0,20));
 
-
 		// ---------------------- Linha 3
 		lblRotTipoAg = new Label("Tipo Agencia");
 		edtTipoAgen = new TextField("");
+		edtTipoAgen.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
 		paneTipoAg = new VBox(lblRotTipoAg, edtTipoAgen);
 		paneTipoAg.setPrefWidth(115);
 
 		lblRotAgenRua = new Label("Rua");
 		edtAgenRua = new TextField("");
+		edtAgenRua.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
 		paneAgenRua = new VBox(lblRotAgenRua,edtAgenRua);
 		paneAgenRua.setPrefWidth(262);
 
-
 		lblRotBairro = new Label("Bairro");
 		edtBairro = new TextField("");
+		edtBairro.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
 		paneBairro = new VBox(lblRotBairro,edtBairro);
-		paneBairro.setPrefWidth(140);
+		paneBairro.setPrefWidth(130);
 
 		lblRotCidade = new Label("Cidade");
 		edtCidade = new TextField("");
+		edtCidade.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
 		paneCidade = new VBox(lblRotCidade,edtCidade);
-		paneCidade.setPrefWidth(180);
-
+		paneCidade.setPrefWidth(175);
 
 		lblRotCep = new Label("Cep");
 		edtCep = new TextField("");
+		edtCep.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
 		paneCep = new VBox(lblRotCep, edtCep);
-		paneCep.setPrefWidth(85);
-
+		paneCep.setPrefWidth(100);
 
 		paneLinha3 = new HBox(paneTipoAg, paneAgenRua, paneBairro,paneCidade, paneCep);
 		paneLinha3.setSpacing(20);
 		paneLinha3.setPadding(new Insets(30,0, 0 ,20));
 
-		
-
-
 		// --------------------------LInha 4
 		lblRotGerente = new Label("Gerente");
 		edtGerente = new TextField("");
+		edtGerente.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
 		paneGerente = new VBox(lblRotGerente, edtGerente);
 		paneGerente.setPrefWidth(115);
 
 		lblRotTel = new Label("Tel.");
 		edtTel = new TextField("");
+		edtTel.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
 		paneTel = new VBox(lblRotTel, edtTel);
-		paneTel.setPrefWidth(125);
+		paneTel.setPrefWidth(135);
 
 		lblRotCel = new Label("Celular");
 		edtCel = new TextField("");
+		edtCel.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
 		paneCel = new VBox(lblRotCel, edtCel);
-		paneCel.setPrefWidth(125);
+		paneCel.setPrefWidth(135);
 
 		btnValidar = new Button("Validar");
-		btnValidar.setPrefWidth(120);
+		btnValidar.setPrefWidth(115);
 		btnValidar.setOnAction(e -> btnValidar_Act());
 		
 		btnLancar = new Button("Lancar");
-		btnLancar.setPrefWidth(120);
+		btnLancar.setPrefWidth(115);
 		btnLancar.setOnAction(e -> btnLancar_Act());
 		
-		btnNovoLanc = new Button("Novo Lancamento");
-		btnNovoLanc.setPrefWidth(130);
+		btnNovoLanc = new Button("Novo Lanc.");
+		btnNovoLanc.setPrefWidth(120);
 		btnNovoLanc.setOnAction(e -> btnNovoLanc_Act());
 		
 		paneBotoes = new HBox(btnValidar, btnLancar, btnNovoLanc);
@@ -197,11 +208,18 @@ public class ContaBancCadastra {
 		scenePrimary = new Scene(panePrimary);
 		stagePrimary.setScene(scenePrimary);
 							   
-		stagePrimary.showAndWait();	
-	
+		stagePrimary.showAndWait();
+
+		inicializar();
 	}
 
-	private static TableView<ContasBanc> criaTableContas(ObservableList<ContasBanc> tabela) {
+	private static void inicializar() {
+
+		limparEdts();
+		habilitarEdts();
+	}
+
+	protected static TableView<ContasBanc> criaTableContas(ObservableList<ContasBanc> tabela) {
 		TableView<ContasBanc> tableContas = new TableView<ContasBanc>();
 
 		TableColumn<ContasBanc, String> colNum = new TableColumn("Num.");
@@ -244,45 +262,87 @@ public class ContaBancCadastra {
 		TableColumn<ContasBanc, String> colCep = new TableColumn("Cep");
 		colCep.setPrefWidth(80);
 		colCep.setCellValueFactory(new PropertyValueFactory<ContasBanc, String> ("AgenCep"));
-
-			
+		
 		tableContas.setItems(tabela);
 		tableContas.getColumns().addAll(colNum,colBanco,colCodBanco,colAgencia, colConta, colTitular,colGerente,colTel,colCel,colCep);
 		return tableContas;
 	}
 
 
-	private static void btnValidar_Act() {
-		if ((dadosEntrados() == true)) {
-			ArrayList arrListDados = new ArrayList();
-			arrListDados = populaArrAtualContaBanc();
-			BusinessRules regra = new BusinessContaBanc();
+	private static void tbvContasBanc_Change() {
+		preencheEdts();
+	}
 
-			if(regra.performConsistencia(arrListDados)) {
+	protected static void preencheEdts() {
+		
+		if(tbvContasBanc.getSelectionModel().getSelectedIndex() > -1) {
+
+			edtNomeBanco.setText(tbvContasBanc.getSelectionModel().getSelectedItem().getNomeBanco());
+			edtCodBanco.setText(Integer.toString(tbvContasBanc.getSelectionModel().getSelectedItem().getCodBanco()));
+			edtAgenBanco.setText(tbvContasBanc.getSelectionModel().getSelectedItem().getAgenBanco());
+			edtContaNumero.setText(tbvContasBanc.getSelectionModel().getSelectedItem().getContaNumero());
+			edtTitularConta.setText(tbvContasBanc.getSelectionModel().getSelectedItem().getTitularConta());
+			edtTipoAgen.setText(tbvContasBanc.getSelectionModel().getSelectedItem().getTipoAgencia());
+			edtAgenRua.setText(tbvContasBanc.getSelectionModel().getSelectedItem().getAgenRua());
+			edtBairro.setText(tbvContasBanc.getSelectionModel().getSelectedItem().getAgenBairro());
+			edtCidade.setText(tbvContasBanc.getSelectionModel().getSelectedItem().getAgenCidade());
+			edtCep.setText(tbvContasBanc.getSelectionModel().getSelectedItem().getAgenCep());
+			edtGerente.setText(tbvContasBanc.getSelectionModel().getSelectedItem().getGerenteConta());
+			edtTel.setText(tbvContasBanc.getSelectionModel().getSelectedItem().getAgenTel());
+			edtCel.setText(tbvContasBanc.getSelectionModel().getSelectedItem().getCelGerente());
+		}
+	}
+
+	private static void btnValidar_Act() {
+		atualContaBanc = new ContasBanc();
+		chave = dadosEntrados();						// TRUE indique que nao houve problemas com entrada de dados
+		arrListDados = populaArrAtualContaBanc();
+		
+		atualContaBanc.setCodConta(0);   				// Indica, para BusiRuleContaBanc, que é o lancamento de nova conta
+		processValidar();
+	}
+
+	protected static void processValidar() {
+
+		if (chave) {
+			BusinessRules regra = new BusinessContaBanc();
+			if(regra.performConsistencia(arrListDados)) {										
 				desabilitarEdts();
 				btnLancar.setDisable(false);
 				btnValidar.setDisable(true);		
-			}		
+			}
 		}
-	}	
+	}
+
 	private static void btnLancar_Act() {
-		ArrayList arrListDados = new ArrayList();
-		arrListDados = populaArrAtualContaBanc();
-		if(arrListDados.isEmpty()){
-			MessageBox.show("Erro no metodo getSolicitacao", "FALHA CATASTROFICA");
-			stagePrimary.close();
-		}
 
 		BusinessRules regra = new BusinessContaBanc();
-			regra.performLancamento(arrListDados);
+		if(regra.performLancamento(arrListDados)){				// Cria um novo registro na tabela contasbanc
 
-		contasBancAtivas = contasBancarias.carregarContasBanc(1); 
-		tbvContasBanc.setItems(contasBancAtivas);
-		
-//		limparEdts();
-//		habilitarEdts();
+			contasBancarias = new DaoContasBanc();							
+			contasBancAtivas = contasBancarias.carregarContasBanc(1); 		
+			tbvContasBanc.setItems(contasBancAtivas);
+			tbvContasBanc.getSelectionModel().selectLast();
+
+
+			ArrayList arrListBconta = new ArrayList();
+			arrListBconta.add(tbvContasBanc.getSelectionModel().getSelectedItem().getCodConta());
+
+			BusinessRules regraBconta = new BusinessBconta();
+			if(regraBconta.performCriacao(arrListBconta)){
+				limparEdts();
+				habilitarEdts();			
+			}else{
+				MessageBox.show("Falha na criacao da conta MOVIMENTO ", "LANCAMENTO");
+			}
+
+			
+		} else {
+			MessageBox.show("Falha na criacao da conta ", "LANCAMENTO");
+		}
+
 		btnLancar.setDisable(true);
-		btnNovoLanc.setDisable(false);	
+		btnNovoLanc.setDisable(false);
 	}
 	
 	private static void btnNovoLanc_Act() {
@@ -293,12 +353,12 @@ public class ContaBancCadastra {
 		btnNovoLanc.setDisable(true);
 	}
 
-	private static boolean dadosEntrados() {
+	protected static boolean dadosEntrados() {
 		boolean libera = true;
 		String temp = "";
 
 		// CodConta (int) : gerado automaticamente na tabela do banco de dados
-
+		
 		// banco  (Str 16)
 		if(edtNomeBanco.getText().length() < 4) {
 			libera = false;
@@ -333,7 +393,6 @@ public class ContaBancCadastra {
 			atualContaBanc.setAgenBanco(temp);
 		}
 			
-
 		// conta  (Str 12)
 		if(edtContaNumero.getText().length() < 4) { 
 			libera = false;
@@ -353,8 +412,7 @@ public class ContaBancCadastra {
 			if(temp.length() > 12) temp = temp.substring(0,11);
 			atualContaBanc.setTitularConta(temp);
 		}
-
-		
+	
 		// tipoAgencia  (Str -12)
 		if(edtTipoAgen.getText().length() < 6) { 
 			libera = false;
@@ -364,7 +422,6 @@ public class ContaBancCadastra {
 			if(temp.length() > 12) temp = temp.substring(0,11);
 			atualContaBanc.setTipoAgencia(temp);
 		}
-
 
 		// agenRua  (Str -20)
 		if(edtAgenRua.getText().length() < 10) { 
@@ -396,7 +453,6 @@ public class ContaBancCadastra {
 			atualContaBanc.setAgenCidade(temp);
 		}
 
-
 		// agenCep  (Str 9)
 		if(edtCep.getText().length() < 9) { 
 			libera = false;
@@ -417,7 +473,6 @@ public class ContaBancCadastra {
 			atualContaBanc.setGerenteConta(temp);
 		}
 
-
 		// agenTel (Str 13)
 		if(edtTel.getText().length() < 9) { 
 			libera = false;
@@ -427,7 +482,6 @@ public class ContaBancCadastra {
 			if(temp.length() > 12) temp = temp.substring(0, 11);
 			atualContaBanc.setAgenTel(temp);
 		}
-
 
 		// agenCel (Str 13)
 		if(edtCel.getText().length() < 9) { 
@@ -439,20 +493,16 @@ public class ContaBancCadastra {
 			atualContaBanc.setCelGerente(temp);
 		}
 		
-
 		// contaValida  (int) 
-
 		atualContaBanc.setContaValida(0);
 		if(libera == true) {
 			atualContaBanc.setContaValida(1);   // valida: 1   encerrrada: 0
 			atualContaBanc.setContaTipo("b");	// b: conta movimento bancario
 		}
-
-	
 		return libera;
 	}
 
-	private static ArrayList populaArrAtualContaBanc() {
+	protected static ArrayList populaArrAtualContaBanc() {
 		ArrayList arrList = new ArrayList();
 
 		arrList.add(atualContaBanc.getNomeBanco());
@@ -472,13 +522,14 @@ public class ContaBancCadastra {
 		arrList.add(atualContaBanc.getCelGerente());
 		arrList.add(atualContaBanc.getContaValida());
 		arrList.add(atualContaBanc.getCodConta());
+
 		arrList.add(atualContaBanc.getContaTipo());
+		
 
 		return arrList;
-
 	}
 
-	private static void limparEdts() {
+	protected  static void limparEdts() {
 		edtNomeBanco.setText("");
 		edtCodBanco.setText("");
 		edtAgenBanco.setText("");
@@ -494,7 +545,7 @@ public class ContaBancCadastra {
 		edtCel.setText("");
 	}
 
-	public static void desabilitarEdts() {
+	protected static void desabilitarEdts() {
 		edtNomeBanco.setEditable(false);
 		edtCodBanco.setEditable(false);
 		edtAgenBanco.setEditable(false);
@@ -510,7 +561,7 @@ public class ContaBancCadastra {
 		edtCel.setEditable(false);
 	}
 
-	public static void habilitarEdts() {
+	protected static void habilitarEdts() {
 		edtNomeBanco.setEditable(true);
 		edtCodBanco.setEditable(true);
 		edtAgenBanco.setEditable(true);
@@ -524,6 +575,5 @@ public class ContaBancCadastra {
 		edtGerente.setEditable(true);
 		edtTel.setEditable(true);
 		edtCel.setEditable(true);
-
 	}
 }

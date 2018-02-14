@@ -193,6 +193,16 @@ public class BusiRuleRecebimentos implements BusiRuleSelec {
 		boolean valida = true;
 		return valida;
 	}
+
+	public boolean liberar(ArrayList dados) {
+		boolean valida = false;	
+		return valida;
+	}
+	
+	public boolean criar(ArrayList dados) {
+		boolean valida = false;	
+		return valida;
+	}	
 	
 	private static ArrayList novoRegistroConta() {
 			// Os campos do objeto atualContaBanc sao atualizados para representar um novo registro em Bconta

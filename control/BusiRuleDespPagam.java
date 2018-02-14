@@ -188,6 +188,16 @@ public class BusiRuleDespPagam implements BusiRuleSelec {
 		
 		return valida;	
 	}
+
+	public boolean liberar(ArrayList dados) {
+		boolean valida = false;	
+		return valida;
+	}
+	
+	public boolean criar(ArrayList dados) {
+		boolean valida = false;	
+		return valida;
+	}	
 	
 	private static void populaAtualContaBanc(int conta) {
 		contasMovimentoBanc = new DaoBconta();

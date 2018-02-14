@@ -8,13 +8,17 @@ import java.sql.Statement;
 import java.sql.PreparedStatement;
 import javafx.collections.*;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 import gpw.model.ContasBanc;
 import gpw.dao.banco.Conexao;
 import gpw.view.MessageBox;
+import gpw.control.TestUtils;
 
 /*
 		public ObservableList<ContasBanc> carregarContasBanc(int valida)
+		public void gravar(ArrayList dados) {
+		public void editar(ArrayList dados) {
 */
 
 
@@ -96,5 +100,40 @@ public class DaoContasBanc {
 		} catch (Exception e) {
 			MessageBox.show("Erro ao gravar indices", e.getMessage());
 		}
+	}
+
+	public void editar(ArrayList dados) {
+
+		try {
+			con = Conexao.conectar();
+			String query = "UPDATE contasbanc SET banco=?,codbanco=?,agencia=?,conta=?,tipoagencia=?,titular=?,gerente=?,agencidade=?,agenbairro=?,agenrua=?,agencep=?,agentel=?,celgerente=?,contavalida=?,contatipo=?" +" WHERE codconta = ?";
+			
+			PreparedStatement prepStmt = con.prepareStatement(query);
+			
+			prepStmt.setString(1, (String)dados.get(0));
+			prepStmt.setInt(2, (Integer)dados.get(1));
+			prepStmt.setString(3, (String)dados.get(2));
+			prepStmt.setString(4, (String)dados.get(3));
+			prepStmt.setString(5, (String)dados.get(4));
+
+			prepStmt.setString(6, (String)dados.get(5));
+			prepStmt.setString(7, (String)dados.get(6));
+			prepStmt.setString(8, (String)dados.get(7));
+			prepStmt.setString(9, (String)dados.get(8));
+			prepStmt.setString(10, (String)dados.get(9));
+
+			prepStmt.setString(11, (String)dados.get(10));
+			prepStmt.setString(12, (String)dados.get(11));
+			prepStmt.setString(13, (String)dados.get(12));
+			prepStmt.setInt(14, (Integer)dados.get(13));
+			prepStmt.setString(15, (String)dados.get(15));
+			prepStmt.setInt(16, (Integer)dados.get(14));
+			prepStmt.execute();
+			prepStmt.close();
+			
+		} catch (Exception e) {
+			MessageBox.show("Erro ao gravar Pagador", e.getMessage());
+		}
+
 	}
 }

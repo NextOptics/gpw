@@ -6,16 +6,19 @@ public class ContasBanc {
 	private String agenBanco;
 	private String contaNumero;
 	private String tipoAgencia;
+
 	private String titularConta;
 	private String gerenteConta;
 	private String agenCidade;
 	private String agenBairro;
 	private String agenRua;
+
 	private String agenCep;
 	private String agenTel;
 	private String celGerente;
 	private int contaValida;
 	private int codConta;
+	
 	private String contaTipo;
 	
 	public ContasBanc() {

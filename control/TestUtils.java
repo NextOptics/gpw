@@ -232,5 +232,23 @@ public class TestUtils {
 		System.out.println("********* : contaValida : " + dadosContaBanc.get(13));
 		System.out.println("********* : codConta :    " + dadosContaBanc.get(14));
 		System.out.println("********* : contaTipo :   " + dadosContaBanc.get(15));
+	}
+
+	public static void printBconta(ArrayList dadosBconta) {
+
+		System.out.println("********* : datalanc :      " + dadosBconta.get(0));	
+		System.out.println("********* : docum :         " + dadosBconta.get(1));
+		System.out.println("********* : valor :         " + dadosBconta.get(2));	
+		System.out.println("********* : natopera :      " + dadosBconta.get(3));
+		System.out.println("********* : saldoant :      " + dadosBconta.get(4));
+
+		System.out.println("********* : saldoatual :    " + dadosBconta.get(5));
+		System.out.println("********* : histórico :     " + dadosBconta.get(6));
+		System.out.println("********* : usuario :       " + dadosBconta.get(7));
+		System.out.println("********* : lancanum :      " + dadosBconta.get(8));
+		System.out.println("********* : contaorigdest : " + dadosBconta.get(9));
+
+		System.out.println("********* : numpagam :      " + dadosBconta.get(10));
+		
 	}	
 }

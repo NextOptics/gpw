@@ -25,35 +25,53 @@ public class BusiRuleContaBanc implements BusiRuleSelec {
 		boolean valida = true;
 		ObservableList<ContasBanc> contasBancAtivas;
 		DaoContasBanc contasBancarias;
+		int codContaExistente = 0;
 		
 		contasBancarias = new DaoContasBanc();	
 		contasBancAtivas = contasBancarias.carregarContasBanc(1);
 
-		int numObj = contasBancAtivas.size();
-		System.out.println(); 
-		for(int i = 0; i < numObj; i++){
+													// Verifica se o numero de contra entrada corresponte a uma conta ja existente
+		int numObjetos = contasBancAtivas.size();  	// Verifica quantas contas estao cadastradas como validas
+		for(int i = 0; i < numObjetos; i++){
 			if(contasBancAtivas.get(i).getContaNumero().equals((String)dados.get(3))){
-				valida = false;
-				MessageBox.show("Ja existe conta bancaria com este numero", "CONTAS");
+				codContaExistente = contasBancAtivas.get(i).getCodConta();
 				break;
+			}else {
+				codContaExistente = 0;
 			}
 		}
+		
+		if((Integer)dados.get(14) > 0 ) {      // codConta > 0 ---> Edicao de conta
+			if(codContaExistente > 0 ) {
+				valida = true;		
+			}else {
+				MessageBox.show("Nao pode ser alterado o numero da conta em edicao", "CONTAS");
+				valida = false;
+			}
+
+		}else { 								// codConta = 0  ----->  Cadastramento de nova conta		
+			if(codContaExistente > 0 ) {
+				MessageBox.show("Ja existe conta bancaria com este numero", "CONTAS");
+				valida = false;
+			}	
+		}	
 		return valida;
 	}
+
 	
 	public boolean lancar(ArrayList dados) {
 	
 		boolean valida = true;
 		DaoContasBanc registro = new DaoContasBanc();
-		registro.gravar(dados);
-		
+		registro.gravar(dados);	
 		return valida;
 	}
 	
 	public boolean editar(ArrayList dados) {
+
 		boolean valida = true;
 		DaoContasBanc registro = new DaoContasBanc();
-//		registro.editar(dados);
+		registro.editar(dados);
 		return valida;
 	}
 
@@ -65,4 +83,16 @@ public class BusiRuleContaBanc implements BusiRuleSelec {
 		boolean valida = true;
 		return valida;
 	}
+
+	public boolean liberar(ArrayList dados) {
+		boolean valida = false;	
+		return valida;
+	}
+	
+	public boolean criar(ArrayList dados) {
+		boolean valida = false;
+
+
+		return valida;
+	}	
 }

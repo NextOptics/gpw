@@ -94,4 +94,14 @@ public class BusiRuleDespesas implements BusiRuleSelec {
 		boolean valida = true;
 		return valida;
 	}
+
+	public boolean liberar(ArrayList dados) {
+		boolean valida = false;	
+		return valida;
+	}
+	
+	public boolean criar(ArrayList dados) {
+		boolean valida = false;	
+		return valida;
+	}	
 }

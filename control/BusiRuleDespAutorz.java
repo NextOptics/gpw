@@ -123,6 +123,16 @@ public class BusiRuleDespAutorz implements BusiRuleSelec {
 		
 		return valida;
 	}
+
+	public boolean liberar(ArrayList dados) {
+		boolean valida = false;	
+		return valida;
+	}
+	
+	public boolean criar(ArrayList dados) {
+		boolean valida = false;	
+		return valida;
+	}	
 }
 
 /*

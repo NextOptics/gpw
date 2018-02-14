@@ -101,11 +101,14 @@ public class GpwFin extends Application {
 				MenuItem menuItemBancConCadastra = new MenuItem("Cadastra");
 					menuItemBancConCadastra.setOnAction(e -> menuItemBancConCadastra_Act());
 				MenuItem menuItemBancConMostra = new MenuItem("Mostra");
+					menuItemBancConMostra.setOnAction(e -> menuItemBancConMostra_Act());
 				MenuItem menuItemBancConEdita = new MenuItem("Edita");
+					menuItemBancConEdita.setOnAction(e -> menuItemBancConEdita_Act());
 				Menu menuBancConRelatorios = new Menu("Relatorios");
 					MenuItem menuItemBancConRelHistorico = new MenuItem("Historico");
 					menuBancConRelatorios.getItems().addAll(menuItemBancConRelHistorico);
 				MenuItem menuItemBancConEncerra = new MenuItem("Encerra");
+					menuItemBancConEncerra.setOnAction(e -> menuItemBancConEncerra_Act());
 				MenuItem menuItemBancConMovimenta = new MenuItem("Credito/Debito");
 				menuBancContas.getItems().addAll(menuItemBancConCadastra, menuItemBancConMostra, menuItemBancConEdita, menuBancConRelatorios, menuItemBancConEncerra, menuItemBancConMovimenta);
 					
@@ -243,11 +246,14 @@ public class GpwFin extends Application {
 	public void menuItemDespAgenEmite_Act() {DespAgenEmite.show();}
 	
 	public void menuItemDespPagConfirma_Act() {DespPagConfirma.show();}
-	
-	public void menuItemBancConCadastra_Act() {
-		System.out.println();
-		System.out.println("******  Entrei no menuItem");
-		ContaBancCadastra.show();}
+
+	public void menuItemBancConCadastra_Act() {ContaBancCadastra.show();}
+
+	public void menuItemBancConMostra_Act() {ContaBancMostra.show();}
+
+	public void menuItemBancConEdita_Act() {ContaBancEdita.show();}
+
+	public void menuItemBancConEncerra_Act() {ContaBancEncerra.show();}
 			    
 	
 	public static void main (String[] args) {
