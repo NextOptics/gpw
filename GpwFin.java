@@ -14,10 +14,11 @@ import gpw.model.Inflacao;
 import java.util.HashMap;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import gpw.view.*;
 import gpw.dao.DaoInflacao;
-import gpw.control.DateUtils;
+import gpw.control.*;
 
 
 
@@ -247,13 +248,26 @@ public class GpwFin extends Application {
 	
 	public void menuItemDespPagConfirma_Act() {DespPagConfirma.show();}
 
-	public void menuItemBancConCadastra_Act() {ContaBancCadastra.show();}
+	public void menuItemBancConCadastra_Act() {
+		FormulariosBconta formSelecionado = new FormularioBcontaCadastra();
+		formSelecionado.performCadastra();
+	}
 
-	public void menuItemBancConMostra_Act() {ContaBancMostra.show();}
+	public void menuItemBancConMostra_Act() {
+		FormulariosBconta formSelecionado = new FormularioBcontaMostra();
+		System.out.println("***** formSelecionado: " + formSelecionado.getClass());
+		formSelecionado.performMostra();
+	}
 
-	public void menuItemBancConEdita_Act() {ContaBancEdita.show();}
+	public void menuItemBancConEdita_Act() {
+		FormulariosBconta formSelecionado = new FormularioBcontaEdita();
+		formSelecionado.performEdita();
+	}
 
-	public void menuItemBancConEncerra_Act() {ContaBancEncerra.show();}
+	public void menuItemBancConEncerra_Act() {
+		FormulariosBconta formSelecionado = new FormularioBcontaEncerra();
+		formSelecionado.performCancela();
+	}
 			    
 	
 	public static void main (String[] args) {

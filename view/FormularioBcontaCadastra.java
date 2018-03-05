@@ -1,5 +1,7 @@
 package gpw.view;
 
+import java.util.ArrayList;
+
 import javafx.application.*;
 import javafx.stage.*;
 import javafx.scene.*;
@@ -7,38 +9,45 @@ import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.geometry.*;
 import javafx.scene.control.cell.*;
-import javafx.scene.text.*;
+import javafx.collections.*;
 import java.util.ArrayList;
+import javafx.scene.text.*;
 
 import gpw.control.*;
 import gpw.model.ContasBanc;
-
 import gpw.dao.DaoContasBanc;
 
+/*
+	public FormularioBcontaCadastra() {
+	public static void show() {	
+*/
 
-public class ContaBancEncerra extends ContaBancCadastra {
 
-	public static void show() {
+public class FormularioBcontaCadastra  extends FormulariosBconta{
 
-		atualContaBanc = new ContasBanc();
+	public FormularioBcontaCadastra() {
+		formSelecionado = new FormBcontaCadastra();	
+	}
+
+	public static void show() {	
 
 		stagePrimary = new Stage();
 		stagePrimary.initModality(Modality.WINDOW_MODAL);
-		stagePrimary.setTitle("Edita Conta Bancaria");
+		stagePrimary.setTitle("Cadastra Conta Bancaria");
 		stagePrimary.setMinWidth(940);
 		stagePrimary.setMaxWidth(940);
 		stagePrimary.setMaxHeight(940);
 
 		// --------------------- Linha 1
 
-		lblRotContasAtivas = new Label("Encerra Conta Bancaria");
+		lblRotContasAtivas = new Label("Contas Bancarias Ativas");
 
 		contasBancarias = new DaoContasBanc();
-		contasBancAtivas = contasBancarias.carregarContasBanc(1);  // Este metodo está em dao/DaoContasBanc
+		contasBancAtivas = contasBancarias.carregarContasBanc(1);  // contasBancarias = ObservableList	
 		tbvContasBanc = new TableView<ContasBanc>();
-		tbvContasBanc = criaTableContas(contasBancAtivas);			// Metodo está em ContaBancCadastra
+		tbvContasBanc = criaTableContas(contasBancAtivas);
 		tbvContasBanc.setItems(contasBancAtivas);	
-
+		
 		tbvContasBanc.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> tbvContasBanc_Change());	
 		
 		paneContasAtivas = new VBox(lblRotContasAtivas,tbvContasBanc);
@@ -49,122 +58,94 @@ public class ContaBancEncerra extends ContaBancCadastra {
 		paneLinha1 = new HBox(paneContasAtivas);
 		paneLinha1.setPadding(new Insets(30,0,0,20));
 	
-	
 		// --------------------  Linha 2
 		lblRotBanco = new Label("Banco");
 		edtNomeBanco = new TextField("");
-		edtNomeBanco.setStyle("-fx-text-inner-color: blue;");
 		edtNomeBanco.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
-		edtNomeBanco.setEditable(false);
 		paneBanco = new VBox(lblRotBanco, edtNomeBanco);
 		paneBanco.setPrefWidth(150);
 
 		lblRotCodBanco = new Label("NumBanco");
 		edtCodBanco = new TextField("");
-		edtCodBanco.setStyle("-fx-text-inner-color: blue;");
 		edtCodBanco.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
-		edtCodBanco.setEditable(false);
 		paneCodBanco = new VBox(lblRotCodBanco,edtCodBanco);
 		paneCodBanco.setPrefWidth(80);
 		
 		lblRotAgencia = new Label("Agencia");
 		edtAgenBanco = new TextField("");
-		edtAgenBanco.setStyle("-fx-text-inner-color: blue;");
 		edtAgenBanco.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
-		edtAgenBanco.setEditable(false);
 		paneAgencia = new VBox(lblRotAgencia,edtAgenBanco);
 		paneAgencia.setPrefWidth(100);
 		
 		lblRotConta = new Label("Conta");
 		edtContaNumero = new TextField("");
-		edtContaNumero.setStyle("-fx-text-inner-color: blue;");
 		edtContaNumero.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
-		edtContaNumero.setEditable(false);
 		paneConta = new VBox(lblRotConta,edtContaNumero);
 		paneConta.setPrefWidth(120);
 		
 		lblRotTitular = new Label("Titular");
 		edtTitularConta = new TextField("");
-		edtTitularConta.setStyle("-fx-text-inner-color: blue;");
 		edtTitularConta.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
-		edtTitularConta.setEditable(false);
 		paneTitular = new VBox(lblRotTitular,edtTitularConta);
 		paneTitular.setPrefWidth(250);
 
 		paneLinha2 = new HBox(paneBanco, paneCodBanco, paneAgencia, paneConta, paneTitular);
 		paneLinha2.setSpacing(20);
 		paneLinha2.setPadding(new Insets(30,0,0,20));
-	
+
 		// ---------------------- Linha 3
 		lblRotTipoAg = new Label("Tipo Agencia");
 		edtTipoAgen = new TextField("");
-		edtTipoAgen.setStyle("-fx-text-inner-color: blue;");
 		edtTipoAgen.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
-		edtTipoAgen.setEditable(false);
 		paneTipoAg = new VBox(lblRotTipoAg, edtTipoAgen);
 		paneTipoAg.setPrefWidth(115);
 
 		lblRotAgenRua = new Label("Rua");
 		edtAgenRua = new TextField("");
-		edtAgenRua.setStyle("-fx-text-inner-color: blue;");
 		edtAgenRua.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
-		edtAgenRua.setEditable(false);
 		paneAgenRua = new VBox(lblRotAgenRua,edtAgenRua);
 		paneAgenRua.setPrefWidth(262);
 
 		lblRotBairro = new Label("Bairro");
 		edtBairro = new TextField("");
-		edtBairro.setStyle("-fx-text-inner-color: blue;");
 		edtBairro.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
-		edtBairro.setEditable(false);
 		paneBairro = new VBox(lblRotBairro,edtBairro);
 		paneBairro.setPrefWidth(130);
 
 		lblRotCidade = new Label("Cidade");
 		edtCidade = new TextField("");
-		edtCidade.setStyle("-fx-text-inner-color: blue;");
 		edtCidade.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
-		edtCidade.setEditable(false);
 		paneCidade = new VBox(lblRotCidade,edtCidade);
-		paneCidade.setPrefWidth(180);
+		paneCidade.setPrefWidth(175);
 
 		lblRotCep = new Label("Cep");
 		edtCep = new TextField("");
-		edtCep.setStyle("-fx-text-inner-color: blue;");
 		edtCep.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
-		edtCep.setEditable(false);
 		paneCep = new VBox(lblRotCep, edtCep);
-		paneCep.setPrefWidth(95);
+		paneCep.setPrefWidth(100);
 
 		paneLinha3 = new HBox(paneTipoAg, paneAgenRua, paneBairro,paneCidade, paneCep);
 		paneLinha3.setSpacing(20);
 		paneLinha3.setPadding(new Insets(30,0, 0 ,20));
 
-	
 		// --------------------------LInha 4
 		lblRotGerente = new Label("Gerente");
 		edtGerente = new TextField("");
-		edtGerente.setStyle("-fx-text-inner-color: blue;");
 		edtGerente.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
-		edtGerente.setEditable(false);
 		paneGerente = new VBox(lblRotGerente, edtGerente);
 		paneGerente.setPrefWidth(115);
 
 		lblRotTel = new Label("Tel.");
 		edtTel = new TextField("");
-		edtTel.setStyle("-fx-text-inner-color: blue;");
 		edtTel.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
-		edtTel.setEditable(false);
 		paneTel = new VBox(lblRotTel, edtTel);
-		paneTel.setPrefWidth(125);
+		paneTel.setPrefWidth(135);
 
 		lblRotCel = new Label("Celular");
 		edtCel = new TextField("");
-		edtCel.setStyle("-fx-text-inner-color: blue;");
 		edtCel.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
-		edtCel.setEditable(false);
 		paneCel = new VBox(lblRotCel, edtCel);
-		paneCel.setPrefWidth(125);
+		paneCel.setPrefWidth(135);
 
 		btnValidar = new Button("Validar");
 		btnValidar.setPrefWidth(115);
@@ -172,17 +153,15 @@ public class ContaBancEncerra extends ContaBancCadastra {
 		
 		btnLancar = new Button("Lancar");
 		btnLancar.setPrefWidth(115);
-//		btnLancar.setOnAction(e -> btnLancar_Act());
+		btnLancar.setOnAction(e -> btnLancar_Act());
 		
 		btnNovoLanc = new Button("Novo Lanc.");
 		btnNovoLanc.setPrefWidth(120);
-//		btnNovoLanc.setOnAction(e -> btnNovoLanc_Act());
+		btnNovoLanc.setOnAction(e -> btnNovoLanc_Act());
 		
 		paneBotoes = new HBox(btnValidar, btnLancar, btnNovoLanc);
 		paneBotoes.setSpacing(25);
 		paneBotoes.setPadding(new Insets(17, 0, 0, 15));
-
-
 
 		paneLinha4 = new HBox(paneGerente, paneTel, paneCel, paneBotoes);
 		paneLinha4.setSpacing(20);
@@ -194,43 +173,65 @@ public class ContaBancEncerra extends ContaBancCadastra {
 		panePrimary.setPadding(new Insets(30,0,0,20));
 		scenePrimary = new Scene(panePrimary);
 		stagePrimary.setScene(scenePrimary);
-							   
-		stagePrimary.showAndWait();		
+					   
+		stagePrimary.showAndWait();
+
 	}
 
-	private static void tbvContasBanc_Change() {
-		preencheEdts();
-//		codContaSelecionada = tbvContasBanc.getSelectionModel().getSelectedItem().getCodConta();								
-		// Metodo esta em ContaBancCadastra
-	}
 
-	private static void btnValidar_Act() {
-		chave = dadosEntrados();	
-		atualContaBanc.setCodConta(tbvContasBanc.getSelectionModel().getSelectedItem().getCodConta());
+	protected static void btnValidar_Act() {
+		atualContaBanc = new ContasBanc();
+		chave = dadosEntrados();
 		arrListDados = populaArrAtualContaBanc();
-		processLiberar();
-	}
-
-	private static void processLiberar() {
-
-		if(chave) {
-			BusinessRules regra = new BusinessBconta();
-			if(regra.performLiberacao(arrListDados)) {
-				arrListDados.set(13, 0);
-
-				BusinessRules regraNova = new BusinessContaBanc();
-				if(regraNova.performEdicao(arrListDados)) {
-//					limparEdts();
-//					habilitarEdts();
-					System.out.println();
-					System.out.println("********* Conta: " + arrListDados.get(3) + "   Encerrada ");
-				}
-
-				
-			}else {
-				MessageBox.show("Esta conta nao possui saldo zero ", "LANCAMENTOj");
+		atualContaBanc.setCodConta(0);
+		if (chave) {
+			BusinessRules regra = new BusinessContaBanc();
+			if(regra.performConsistencia(arrListDados)) {										
+				desabilitarEdts();
+				btnLancar.setDisable(false);
+				btnValidar.setDisable(true);		
 			}
 		}
+	}
+
+
+	protected static void btnLancar_Act() {
+
+		BusinessRules regra = new BusinessContaBanc();
+		if(regra.performLancamento(arrListDados)){				// Cria um novo registro na tabela contasbanc
+
+			contasBancarias = new DaoContasBanc();							
+			contasBancAtivas = contasBancarias.carregarContasBanc(1); 		
+			tbvContasBanc.setItems(contasBancAtivas);
+			tbvContasBanc.getSelectionModel().selectLast();    // Carrega contas bancarias ativas com a ultima criada
+
+
+			ArrayList arrListBconta = new ArrayList();
+			arrListBconta.add(tbvContasBanc.getSelectionModel().getSelectedItem().getCodConta());
+
+			BusinessRules regraBconta = new BusinessBconta();
+			if(regraBconta.performCriacao(arrListBconta)){      // cria uma conta movimento correspondente a conta criada
+				limparEdts();
+				habilitarEdts();			
+			}else{
+				MessageBox.show("Falha na criacao da conta MOVIMENTO ", "LANCAMENTO");
+			}
+
+			
+		} else {
+			MessageBox.show("Falha na criacao da conta ", "LANCAMENTO");
+		}
+
+		btnLancar.setDisable(true);
+		btnNovoLanc.setDisable(false);
+	}
+
+	protected static void btnNovoLanc_Act() {
+		limparEdts();
+		habilitarEdts();
+		btnValidar.setDisable(false);
+		btnLancar.setDisable(true);
+		btnNovoLanc.setDisable(true);
 	}
 
 }

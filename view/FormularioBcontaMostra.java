@@ -1,5 +1,7 @@
 package gpw.view;
 
+import java.util.ArrayList;
+
 import javafx.application.*;
 import javafx.stage.*;
 import javafx.scene.*;
@@ -7,24 +9,33 @@ import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.geometry.*;
 import javafx.scene.control.cell.*;
-import javafx.scene.text.*;
+import javafx.collections.*;
 import java.util.ArrayList;
+import javafx.scene.text.*;
 
 import gpw.control.*;
 import gpw.model.ContasBanc;
 import gpw.dao.DaoContasBanc;
 
+/*
+		public FormularioBcontaMostra() {
+		public static void show() {
+*/
 
-public class ContaBancEdita extends ContaBancCadastra {
+
+public class FormularioBcontaMostra extends FormulariosBconta {
+
+	public FormularioBcontaMostra() {
+		formSelecionado = new FormBcontaMostra();	
+	}
 
 	public static void show() {
 
 		atualContaBanc = new ContasBanc();
-		arrListDados = new ArrayList();
 
 		stagePrimary = new Stage();
 		stagePrimary.initModality(Modality.WINDOW_MODAL);
-		stagePrimary.setTitle("Edita Conta Bancaria");
+		stagePrimary.setTitle("Mostra Conta Bancaria");
 		stagePrimary.setMinWidth(940);
 		stagePrimary.setMaxWidth(940);
 		stagePrimary.setMaxHeight(940);
@@ -55,6 +66,7 @@ public class ContaBancEdita extends ContaBancCadastra {
 		edtNomeBanco = new TextField("");
 		edtNomeBanco.setStyle("-fx-text-inner-color: blue;");
 		edtNomeBanco.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+		edtNomeBanco.setEditable(false);
 		paneBanco = new VBox(lblRotBanco, edtNomeBanco);
 		paneBanco.setPrefWidth(150);
 
@@ -62,6 +74,7 @@ public class ContaBancEdita extends ContaBancCadastra {
 		edtCodBanco = new TextField("");
 		edtCodBanco.setStyle("-fx-text-inner-color: blue;");
 		edtCodBanco.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+		edtCodBanco.setEditable(false);
 		paneCodBanco = new VBox(lblRotCodBanco,edtCodBanco);
 		paneCodBanco.setPrefWidth(80);
 		
@@ -69,6 +82,7 @@ public class ContaBancEdita extends ContaBancCadastra {
 		edtAgenBanco = new TextField("");
 		edtAgenBanco.setStyle("-fx-text-inner-color: blue;");
 		edtAgenBanco.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+		edtAgenBanco.setEditable(false);
 		paneAgencia = new VBox(lblRotAgencia,edtAgenBanco);
 		paneAgencia.setPrefWidth(100);
 		
@@ -76,6 +90,7 @@ public class ContaBancEdita extends ContaBancCadastra {
 		edtContaNumero = new TextField("");
 		edtContaNumero.setStyle("-fx-text-inner-color: blue;");
 		edtContaNumero.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+		edtContaNumero.setEditable(false);
 		paneConta = new VBox(lblRotConta,edtContaNumero);
 		paneConta.setPrefWidth(120);
 		
@@ -83,6 +98,7 @@ public class ContaBancEdita extends ContaBancCadastra {
 		edtTitularConta = new TextField("");
 		edtTitularConta.setStyle("-fx-text-inner-color: blue;");
 		edtTitularConta.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+		edtTitularConta.setEditable(false);
 		paneTitular = new VBox(lblRotTitular,edtTitularConta);
 		paneTitular.setPrefWidth(250);
 
@@ -95,6 +111,7 @@ public class ContaBancEdita extends ContaBancCadastra {
 		edtTipoAgen = new TextField("");
 		edtTipoAgen.setStyle("-fx-text-inner-color: blue;");
 		edtTipoAgen.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+		edtTipoAgen.setEditable(false);
 		paneTipoAg = new VBox(lblRotTipoAg, edtTipoAgen);
 		paneTipoAg.setPrefWidth(115);
 
@@ -102,6 +119,7 @@ public class ContaBancEdita extends ContaBancCadastra {
 		edtAgenRua = new TextField("");
 		edtAgenRua.setStyle("-fx-text-inner-color: blue;");
 		edtAgenRua.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+		edtAgenRua.setEditable(false);
 		paneAgenRua = new VBox(lblRotAgenRua,edtAgenRua);
 		paneAgenRua.setPrefWidth(262);
 
@@ -109,6 +127,7 @@ public class ContaBancEdita extends ContaBancCadastra {
 		edtBairro = new TextField("");
 		edtBairro.setStyle("-fx-text-inner-color: blue;");
 		edtBairro.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+		edtBairro.setEditable(false);
 		paneBairro = new VBox(lblRotBairro,edtBairro);
 		paneBairro.setPrefWidth(130);
 
@@ -116,6 +135,7 @@ public class ContaBancEdita extends ContaBancCadastra {
 		edtCidade = new TextField("");
 		edtCidade.setStyle("-fx-text-inner-color: blue;");
 		edtCidade.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+		edtCidade.setEditable(false);
 		paneCidade = new VBox(lblRotCidade,edtCidade);
 		paneCidade.setPrefWidth(180);
 
@@ -123,7 +143,7 @@ public class ContaBancEdita extends ContaBancCadastra {
 		edtCep = new TextField("");
 		edtCep.setStyle("-fx-text-inner-color: blue;");
 		edtCep.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
-		
+		edtCep.setEditable(false);
 		paneCep = new VBox(lblRotCep, edtCep);
 		paneCep.setPrefWidth(95);
 
@@ -137,6 +157,7 @@ public class ContaBancEdita extends ContaBancCadastra {
 		edtGerente = new TextField("");
 		edtGerente.setStyle("-fx-text-inner-color: blue;");
 		edtGerente.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+		edtGerente.setEditable(false);
 		paneGerente = new VBox(lblRotGerente, edtGerente);
 		paneGerente.setPrefWidth(115);
 
@@ -144,6 +165,7 @@ public class ContaBancEdita extends ContaBancCadastra {
 		edtTel = new TextField("");
 		edtTel.setStyle("-fx-text-inner-color: blue;");
 		edtTel.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+		edtTel.setEditable(false);
 		paneTel = new VBox(lblRotTel, edtTel);
 		paneTel.setPrefWidth(125);
 
@@ -151,27 +173,12 @@ public class ContaBancEdita extends ContaBancCadastra {
 		edtCel = new TextField("");
 		edtCel.setStyle("-fx-text-inner-color: blue;");
 		edtCel.setFont(Font.font("Verdana", FontWeight.BOLD, 14));
+		edtCel.setEditable(false);
 		paneCel = new VBox(lblRotCel, edtCel);
 		paneCel.setPrefWidth(125);
 
-		btnValidar = new Button("Validar");
-		btnValidar.setPrefWidth(115);
-		btnValidar.setOnAction(e -> btnValidar_Act());
-		
-		btnLancar = new Button("Lancar");
-		btnLancar.setPrefWidth(115);
-		btnLancar.setOnAction(e -> btnLancar_Act());
-		
-		btnNovoLanc = new Button("Novo Lanc.");
-		btnNovoLanc.setPrefWidth(120);
-		btnNovoLanc.setOnAction(e -> btnNovoLanc_Act());
-		
-		paneBotoes = new HBox(btnValidar, btnLancar, btnNovoLanc);
-		paneBotoes.setSpacing(25);
-		paneBotoes.setPadding(new Insets(17, 0, 0, 15));
 
-
-		paneLinha4 = new HBox(paneGerente, paneTel, paneCel,paneBotoes);
+		paneLinha4 = new HBox(paneGerente, paneTel, paneCel);
 		paneLinha4.setSpacing(20);
 		paneLinha4.setPadding(new Insets(30,0,30,20));
 
@@ -182,48 +189,6 @@ public class ContaBancEdita extends ContaBancCadastra {
 		scenePrimary = new Scene(panePrimary);
 		stagePrimary.setScene(scenePrimary);
 							   
-		stagePrimary.showAndWait();
-		limparEdts();
-		habilitarEdts();		
-	}
-
-	private static void btnValidar_Act() {
-		chave = dadosEntrados();
-		atualContaBanc.setCodConta(tbvContasBanc.getSelectionModel().getSelectedItem().getCodConta());
-		arrListDados = populaArrAtualContaBanc();
-		processValidar();
-	}
-
-	private static void btnLancar_Act() {
-		ArrayList arrListDados = new ArrayList();
-		arrListDados = populaArrAtualContaBanc();
-		
-		if(chave) {
-			BusinessRules regra = new BusinessContaBanc();
-			if(regra.performEdicao(arrListDados)) {	
-				limparEdts();
-				habilitarEdts();
-			}else {
-				MessageBox.show("Falha no lancamento ", "LANCAMENTO");
-			}
-		}
-		
-		btnLancar.setDisable(true);
-		btnNovoLanc.setDisable(false);
-	
-	}
-
-	private static void btnNovoLanc_Act() {
-		limparEdts();
-		habilitarEdts();
-		btnValidar.setDisable(false);
-		btnLancar.setDisable(true);
-		btnNovoLanc.setDisable(true);
-	}
-
-
-	private static void tbvContasBanc_Change() {
-		preencheEdts();								
-		// Metodo esta em ContaBancCadastra
+		stagePrimary.showAndWait();		
 	}
 }
