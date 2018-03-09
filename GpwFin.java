@@ -226,13 +226,26 @@ public class GpwFin extends Application {
 	
 	public void menuItemGerInflLanca_Act() {LancaIndicesInfla.show();}
 	
-	public void menuItemRecAgenda_Act() {RecAgenda.show();}
+	public void menuItemRecAgenda_Act() {
+		FormulariosRecebimento tipoFormulario = new FormularioRecebimentoAgenda();
+		tipoFormulario.performLanca();
+	}
 	
-	public void menuItemRecConfirma_Act() {RecConfirma.show();}
+	public void menuItemRecConfirma_Act() {
+		FormulariosRecebimento tipoFormulario = new FormularioRecebimentoConfirma();
+		tipoFormulario.performConfirma();
+	}
 	
-	public void menuItemRecMostra_Act() {RecMostra.show();}
+	public void menuItemRecMostra_Act() {
+		FormulariosRecebimento tipoFormulario = new FormularioRecebimentoMostra();
+		tipoFormulario.performMostra();
+	} 
 	
-	public void menuItemRecEdita_Act() {RecEdita.show();}
+	public void menuItemRecEdita_Act() {
+		FormulariosRecebimento tipoFormulario = new FormularioRecebimentoEdita();
+		tipoFormulario.performEdita();
+	}
+
 	
 	public void menuItemPagCadastra_Act() {PagCadastra.show();}
 	
@@ -249,24 +262,23 @@ public class GpwFin extends Application {
 	public void menuItemDespPagConfirma_Act() {DespPagConfirma.show();}
 
 	public void menuItemBancConCadastra_Act() {
-		FormulariosBconta formSelecionado = new FormularioBcontaCadastra();
-		formSelecionado.performCadastra();
+		FormulariosBconta tipoFormulario = new FormularioBcontaCadastra();
+		tipoFormulario.performCadastra();
 	}
 
 	public void menuItemBancConMostra_Act() {
-		FormulariosBconta formSelecionado = new FormularioBcontaMostra();
-		System.out.println("***** formSelecionado: " + formSelecionado.getClass());
-		formSelecionado.performMostra();
+		FormulariosBconta tipoFormulario = new FormularioBcontaMostra();
+		tipoFormulario.performMostra();
 	}
 
 	public void menuItemBancConEdita_Act() {
-		FormulariosBconta formSelecionado = new FormularioBcontaEdita();
-		formSelecionado.performEdita();
+		FormulariosBconta tipoFormulario = new FormularioBcontaEdita();
+		tipoFormulario.performEdita();
 	}
 
 	public void menuItemBancConEncerra_Act() {
-		FormulariosBconta formSelecionado = new FormularioBcontaEncerra();
-		formSelecionado.performCancela();
+		FormulariosBconta tipoFormulario = new FormularioBcontaEncerra();
+		tipoFormulario.performCancela();
 	}
 			    
 	
